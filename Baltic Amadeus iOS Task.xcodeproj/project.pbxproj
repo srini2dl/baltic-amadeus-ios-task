@@ -8,21 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		CAD0C19429F98784006F51BF /* Baltic_Amadeus_iOS_TaskApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C19329F98784006F51BF /* Baltic_Amadeus_iOS_TaskApp.swift */; };
-		CAD0C19629F98784006F51BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C19529F98784006F51BF /* ContentView.swift */; };
+		CAD0C19629F98784006F51BF /* PostsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C19529F98784006F51BF /* PostsListView.swift */; };
 		CAD0C19829F98786006F51BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAD0C19729F98786006F51BF /* Assets.xcassets */; };
 		CAD0C19B29F98786006F51BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAD0C19A29F98786006F51BF /* Preview Assets.xcassets */; };
 		CAD0C1A929F98AFC006F51BF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1A829F98AFC006F51BF /* Post.swift */; };
 		CAD0C1AB29F98B6B006F51BF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1AA29F98B6B006F51BF /* User.swift */; };
+		CAD0C1AD29F98D8F006F51BF /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1AC29F98D8F006F51BF /* APIService.swift */; };
+		CAD0C1AF29F9957E006F51BF /* PostsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1AE29F9957E006F51BF /* PostsListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CAD0C19029F98784006F51BF /* Baltic Amadeus iOS Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Baltic Amadeus iOS Task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD0C19329F98784006F51BF /* Baltic_Amadeus_iOS_TaskApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Baltic_Amadeus_iOS_TaskApp.swift; sourceTree = "<group>"; };
-		CAD0C19529F98784006F51BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CAD0C19529F98784006F51BF /* PostsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsListView.swift; sourceTree = "<group>"; };
 		CAD0C19729F98786006F51BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAD0C19A29F98786006F51BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CAD0C1A829F98AFC006F51BF /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CAD0C1AA29F98B6B006F51BF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CAD0C1AC29F98D8F006F51BF /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		CAD0C1AE29F9957E006F51BF /* PostsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +81,6 @@
 		CAD0C1A129F98876006F51BF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CAD0C19529F98784006F51BF /* ContentView.swift */,
 				CAD0C1A529F988F9006F51BF /* User */,
 				CAD0C1A429F988E7006F51BF /* PostsList */,
 			);
@@ -87,6 +90,7 @@
 		CAD0C1A329F9888C006F51BF /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CAD0C1AC29F98D8F006F51BF /* APIService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -94,6 +98,8 @@
 		CAD0C1A429F988E7006F51BF /* PostsList */ = {
 			isa = PBXGroup;
 			children = (
+				CAD0C19529F98784006F51BF /* PostsListView.swift */,
+				CAD0C1AE29F9957E006F51BF /* PostsListViewModel.swift */,
 			);
 			path = PostsList;
 			sourceTree = "<group>";
@@ -191,9 +197,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAD0C1AF29F9957E006F51BF /* PostsListViewModel.swift in Sources */,
 				CAD0C1AB29F98B6B006F51BF /* User.swift in Sources */,
+				CAD0C1AD29F98D8F006F51BF /* APIService.swift in Sources */,
 				CAD0C1A929F98AFC006F51BF /* Post.swift in Sources */,
-				CAD0C19629F98784006F51BF /* ContentView.swift in Sources */,
+				CAD0C19629F98784006F51BF /* PostsListView.swift in Sources */,
 				CAD0C19429F98784006F51BF /* Baltic_Amadeus_iOS_TaskApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
