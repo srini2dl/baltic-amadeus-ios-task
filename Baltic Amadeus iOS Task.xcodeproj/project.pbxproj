@@ -11,6 +11,8 @@
 		CAD0C19629F98784006F51BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C19529F98784006F51BF /* ContentView.swift */; };
 		CAD0C19829F98786006F51BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAD0C19729F98786006F51BF /* Assets.xcassets */; };
 		CAD0C19B29F98786006F51BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAD0C19A29F98786006F51BF /* Preview Assets.xcassets */; };
+		CAD0C1A929F98AFC006F51BF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1A829F98AFC006F51BF /* Post.swift */; };
+		CAD0C1AB29F98B6B006F51BF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1AA29F98B6B006F51BF /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		CAD0C19529F98784006F51BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CAD0C19729F98786006F51BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAD0C19A29F98786006F51BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CAD0C1A829F98AFC006F51BF /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		CAD0C1AA29F98B6B006F51BF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +57,7 @@
 			children = (
 				CAD0C1A129F98876006F51BF /* Views */,
 				CAD0C1A729F98951006F51BF /* Utils */,
-				CAD0C1A629F98922006F51BF /* Model */,
+				CAD0C1A629F98922006F51BF /* Models */,
 				CAD0C1A329F9888C006F51BF /* Services */,
 				CAD0C19329F98784006F51BF /* Baltic_Amadeus_iOS_TaskApp.swift */,
 				CAD0C19729F98786006F51BF /* Assets.xcassets */,
@@ -101,11 +105,13 @@
 			path = User;
 			sourceTree = "<group>";
 		};
-		CAD0C1A629F98922006F51BF /* Model */ = {
+		CAD0C1A629F98922006F51BF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CAD0C1A829F98AFC006F51BF /* Post.swift */,
+				CAD0C1AA29F98B6B006F51BF /* User.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		CAD0C1A729F98951006F51BF /* Utils */ = {
@@ -185,6 +191,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAD0C1AB29F98B6B006F51BF /* User.swift in Sources */,
+				CAD0C1A929F98AFC006F51BF /* Post.swift in Sources */,
 				CAD0C19629F98784006F51BF /* ContentView.swift in Sources */,
 				CAD0C19429F98784006F51BF /* Baltic_Amadeus_iOS_TaskApp.swift in Sources */,
 			);
