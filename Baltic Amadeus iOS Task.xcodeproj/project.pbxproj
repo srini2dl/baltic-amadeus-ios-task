@@ -15,6 +15,12 @@
 		CAD0C1AB29F98B6B006F51BF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1AA29F98B6B006F51BF /* User.swift */; };
 		CAD0C1AD29F98D8F006F51BF /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1AC29F98D8F006F51BF /* APIService.swift */; };
 		CAD0C1AF29F9957E006F51BF /* PostsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1AE29F9957E006F51BF /* PostsListViewModel.swift */; };
+		CAD0C1B229F99ED3006F51BF /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1B129F99ED3006F51BF /* PostView.swift */; };
+		CAD0C1B429F9A104006F51BF /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1B329F9A104006F51BF /* UserDetailView.swift */; };
+		CAD0C1B729F9A712006F51BF /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1B629F9A712006F51BF /* CoreDataService.swift */; };
+		CAD0C1BA29F9A7BE006F51BF /* DataBaseModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1B829F9A7BE006F51BF /* DataBaseModel.xcdatamodeld */; };
+		CAD0C1BD29F9AF23006F51BF /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1BC29F9AF23006F51BF /* UserRepository.swift */; };
+		CAD0C1BF29F9B83E006F51BF /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD0C1BE29F9B83E006F51BF /* PostRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +33,12 @@
 		CAD0C1AA29F98B6B006F51BF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CAD0C1AC29F98D8F006F51BF /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		CAD0C1AE29F9957E006F51BF /* PostsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsListViewModel.swift; sourceTree = "<group>"; };
+		CAD0C1B129F99ED3006F51BF /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		CAD0C1B329F9A104006F51BF /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
+		CAD0C1B629F9A712006F51BF /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		CAD0C1B929F9A7BE006F51BF /* DataBaseModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataBaseModel.xcdatamodel; sourceTree = "<group>"; };
+		CAD0C1BC29F9AF23006F51BF /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		CAD0C1BE29F9B83E006F51BF /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +71,7 @@
 		CAD0C19229F98784006F51BF /* Baltic Amadeus iOS Task */ = {
 			isa = PBXGroup;
 			children = (
+				CAD0C1BB29F9AEC2006F51BF /* Repository */,
 				CAD0C1A129F98876006F51BF /* Views */,
 				CAD0C1A729F98951006F51BF /* Utils */,
 				CAD0C1A629F98922006F51BF /* Models */,
@@ -66,6 +79,7 @@
 				CAD0C19329F98784006F51BF /* Baltic_Amadeus_iOS_TaskApp.swift */,
 				CAD0C19729F98786006F51BF /* Assets.xcassets */,
 				CAD0C19929F98786006F51BF /* Preview Content */,
+				CAD0C1B829F9A7BE006F51BF /* DataBaseModel.xcdatamodeld */,
 			);
 			path = "Baltic Amadeus iOS Task";
 			sourceTree = "<group>";
@@ -81,6 +95,7 @@
 		CAD0C1A129F98876006F51BF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CAD0C1B029F99EA2006F51BF /* Post */,
 				CAD0C1A529F988F9006F51BF /* User */,
 				CAD0C1A429F988E7006F51BF /* PostsList */,
 			);
@@ -90,6 +105,7 @@
 		CAD0C1A329F9888C006F51BF /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CAD0C1B529F9A6F0006F51BF /* CoreDataService */,
 				CAD0C1AC29F98D8F006F51BF /* APIService.swift */,
 			);
 			path = Services;
@@ -107,6 +123,7 @@
 		CAD0C1A529F988F9006F51BF /* User */ = {
 			isa = PBXGroup;
 			children = (
+				CAD0C1B329F9A104006F51BF /* UserDetailView.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -125,6 +142,31 @@
 			children = (
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		CAD0C1B029F99EA2006F51BF /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				CAD0C1B129F99ED3006F51BF /* PostView.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		CAD0C1B529F9A6F0006F51BF /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				CAD0C1B629F9A712006F51BF /* CoreDataService.swift */,
+			);
+			path = CoreDataService;
+			sourceTree = "<group>";
+		};
+		CAD0C1BB29F9AEC2006F51BF /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				CAD0C1BC29F9AF23006F51BF /* UserRepository.swift */,
+				CAD0C1BE29F9B83E006F51BF /* PostRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,11 +239,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAD0C1BD29F9AF23006F51BF /* UserRepository.swift in Sources */,
+				CAD0C1BF29F9B83E006F51BF /* PostRepository.swift in Sources */,
+				CAD0C1B229F99ED3006F51BF /* PostView.swift in Sources */,
 				CAD0C1AF29F9957E006F51BF /* PostsListViewModel.swift in Sources */,
 				CAD0C1AB29F98B6B006F51BF /* User.swift in Sources */,
 				CAD0C1AD29F98D8F006F51BF /* APIService.swift in Sources */,
+				CAD0C1B429F9A104006F51BF /* UserDetailView.swift in Sources */,
 				CAD0C1A929F98AFC006F51BF /* Post.swift in Sources */,
 				CAD0C19629F98784006F51BF /* PostsListView.swift in Sources */,
+				CAD0C1B729F9A712006F51BF /* CoreDataService.swift in Sources */,
+				CAD0C1BA29F9A7BE006F51BF /* DataBaseModel.xcdatamodeld in Sources */,
 				CAD0C19429F98784006F51BF /* Baltic_Amadeus_iOS_TaskApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +459,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CAD0C1B829F9A7BE006F51BF /* DataBaseModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CAD0C1B929F9A7BE006F51BF /* DataBaseModel.xcdatamodel */,
+			);
+			currentVersion = CAD0C1B929F9A7BE006F51BF /* DataBaseModel.xcdatamodel */;
+			path = DataBaseModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CAD0C18829F98784006F51BF /* Project object */;
 }

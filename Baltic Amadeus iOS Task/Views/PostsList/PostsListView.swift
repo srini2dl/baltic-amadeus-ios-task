@@ -11,15 +11,22 @@ struct PostsListView: View {
     @StateObject private var viewModel = PostsListViewModel()
 
     var body: some View {
-        VStack {
-            List(viewModel.posts) { post in
-                LazyVStack {
-                    Text(post.title)
+        NavigationView {
+            VStack {
+                List(viewModel.posts) { post in
+                    LazyVStack(alignment: .leading) {
+                        NavigationLink {
+                            UserDetailView(userId: post.userId)
+                        } label: {
+                            PostView(post: post)
+                        }
+                    }
                 }
             }
-        }
-        .task {
-            await viewModel.loadPosts()
+            .navigationTitle("Posts")
+            .task {
+                await viewModel.loadPosts()
+            }
         }
     }
 }
