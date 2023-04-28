@@ -8,7 +8,15 @@
 import Foundation
 import CoreData
 
-class CoreDataService {
+protocol CoreDataServicing {
+    func fetchPosts() -> [PostEntity]
+    func fetchUsers() -> [UserEntity]
+    func fetchUser(by userId: Int) -> UserEntity?
+    func addUser(_ user: User)
+    func addPost(_ post: Post)
+}
+
+class CoreDataService: CoreDataServicing {
     static let shared = CoreDataService()
     
     lazy var container: NSPersistentContainer = {
@@ -23,11 +31,18 @@ class CoreDataService {
         return container
     }()
     
+    lazy var mainContext: NSManagedObjectContext = {
+        let context = container.viewContext
+        context.automaticallyMergesChangesFromParent = true
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return context
+    }()
+    
     private init() {}
     
     // MARK: - Saving
     
-    func save() {
+    private func save() {
         if container.viewContext.hasChanges {
             do {
                 try container.viewContext.save()
@@ -39,10 +54,22 @@ class CoreDataService {
     
     // MARK: - Fetching
     
+    func fetchUser(by userId: Int) -> UserEntity? {
+        let request: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", String(userId))
+        do {
+            let result = try mainContext.fetch(request)
+            return result.first
+        }
+        catch {
+           fatalError("Failed to fetch user: \(error)")
+       }
+    }
+    
     func fetchUsers() -> [UserEntity] {
         let request: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
         do {
-            return try container.viewContext.fetch(request)
+            return try mainContext.fetch(request)
         } catch {
             fatalError("Failed to fetch users: \(error)")
         }
@@ -51,42 +78,56 @@ class CoreDataService {
     func fetchPosts() -> [PostEntity] {
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
         do {
-            return try container.viewContext.fetch(request)
+            return try mainContext.fetch(request)
         } catch {
             fatalError("Failed to fetch posts: \(error)")
         }
     }
     
+    
     // MARK: - Adding
     
+    let serialQueue = DispatchQueue(label: "com.example.serialQueue")
     func addUser(_ user: User) {
-        let entity = UserEntity(context: container.viewContext)
-        entity.id = Int16(user.id)
-        entity.name = user.name
-        entity.username = user.username
-        entity.email = user.email
-        entity.phone = user.phone
-        entity.website = user.website
-        entity.address = AddressEntity(context: container.viewContext)
-        entity.address?.street = user.address.street
-        entity.address?.suite = user.address.suite
-        entity.address?.city = user.address.city
-        entity.address?.zipcode = user.address.zipcode
-        entity.address?.lat = user.address.geo.lat
-        entity.address?.lng = user.address.geo.lng
-        entity.company = CompanyEntity(context: container.viewContext)
-        entity.company?.name = user.company.name
-        entity.company?.catchPhrase = user.company.catchPhrase
-        entity.company?.bs = user.company.bs
-        save()
+        serialQueue.sync {
+            guard fetchUser(by: user.id) == nil else { return }
+            let entity = UserEntity(context: container.viewContext)
+            entity.id = Int16(user.id)
+            entity.name = user.name
+            entity.username = user.username
+            entity.email = user.email
+            entity.phone = user.phone
+            entity.website = user.website
+            entity.address = AddressEntity(context: container.viewContext)
+            entity.address?.street = user.address.street
+            entity.address?.suite = user.address.suite
+            entity.address?.city = user.address.city
+            entity.address?.zipcode = user.address.zipcode
+            entity.address?.lat = user.address.geo.lat
+            entity.address?.lng = user.address.geo.lng
+            entity.company = CompanyEntity(context: container.viewContext)
+            entity.company?.name = user.company.name
+            entity.company?.catchPhrase = user.company.catchPhrase
+            entity.company?.bs = user.company.bs
+            save()
+        }
     }
     
     func addPost(_ post: Post) {
-        let entity = PostEntity(context: container.viewContext)
-        entity.id = Int16(post.id)
-        entity.title = post.title
-        entity.body = post.body
-//        entity.user = user
-        save()
+        container.performBackgroundTask { context in
+            let entity = PostEntity(context: context)
+            entity.id = Int16(post.id)
+            entity.title = post.title
+            entity.body = post.body
+            entity.userId = Int16(post.userId)
+            try? context.save()
+        }
+    }
+    
+    func deletePost() {
+        for post in fetchPosts() {
+            mainContext.delete(post)
+        }
+        try? mainContext.save()
     }
 }

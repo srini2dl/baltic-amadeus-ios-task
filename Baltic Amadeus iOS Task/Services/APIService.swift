@@ -7,11 +7,12 @@
 
 import Foundation
 
-protocol BalticTaskService {
+protocol BalticTaskAPIService {
     func fetchPost() async throws -> [Post]
+    func fetchUser(id: Int) async throws -> User
 }
 
-final class APIService: BalticTaskService {
+final class APIService: BalticTaskAPIService {
     static let shared = APIService()
     private let session = URLSession.shared
     private let baseURL = URL(string: "https://jsonplaceholder.typicode.com")
@@ -22,6 +23,10 @@ final class APIService: BalticTaskService {
     }
     
     private init() {}
+    
+    func fetchUser(id: Int) async throws -> User {
+        try await fetch(endPoint: "\(EndPoint.users.rawValue)/\(id)")
+    }
     
     func fetchPost() async throws -> [Post] {
         try await fetch(endPoint: EndPoint.posts.rawValue)

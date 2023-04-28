@@ -17,6 +17,26 @@ struct User: Codable, Identifiable {
     let website: String
     let company: Company
     
+    init(
+        id: Int,
+        name: String,
+        username: String,
+        email: String,
+        address: Address,
+        phone: String,
+        website: String,
+        company: Company
+    ) {
+        self.id = id
+        self.name = name
+        self.username = username
+        self.email = email
+        self.address = address
+        self.phone = phone
+        self.website = website
+        self.company = company
+    }
+    
     init?(entity: UserEntity) {
         guard let name = entity.name,
               let username = entity.username,
@@ -41,6 +61,27 @@ struct User: Codable, Identifiable {
         self.website = website
         self.company = company
     }
+    
+    static let mock = User(
+        id: 1,
+        name: "Leanne Graham",
+        username: "Bret",
+        email: "Sincere@april.biz",
+        address: Address(
+            street: "Kulas Light",
+            suite: "Apt. 556",
+            city: "Gwenborough",
+            zipcode: "92998-3874",
+            geo: Geo(lat: "-37.3159", lng: "81.1496")
+        ),
+        phone: "1-770-736-8031 x56442",
+        website: "hildegard.org",
+        company: Company(
+            name: "Romaguera-Crona",
+            catchPhrase: "Multi-layered client-server neural-net",
+            bs: "harness real-time e-markets"
+        )
+    )
 }
 
 struct Address: Codable {
@@ -50,9 +91,23 @@ struct Address: Codable {
     let zipcode: String
     let geo: Geo
     
+    init(
+        street: String,
+        suite: String,
+        city: String,
+        zipcode: String,
+        geo: Geo
+    ) {
+        self.street = street
+        self.suite = suite
+        self.city = city
+        self.zipcode = zipcode
+        self.geo = geo
+    }
+    
     init?(entity: AddressEntity) {
         guard let street = entity.street,
-              let suit = entity.suite,
+              let suite = entity.suite,
               let city = entity.city,
               let zipcode = entity.zipcode,
               let lat = entity.lat,
@@ -62,7 +117,7 @@ struct Address: Codable {
             return nil
         }
         self.street = street
-        self.suite = suit
+        self.suite = suite
         self.city = city
         self.zipcode = zipcode
         self.geo = Geo(lat: lat, lng: lng)
@@ -78,6 +133,16 @@ struct Company: Codable {
     let name: String
     let catchPhrase: String
     let bs: String
+    
+    init(
+        name: String,
+        catchPhrase: String,
+        bs: String
+    ) {
+        self.name = name
+        self.catchPhrase = catchPhrase
+        self.bs = bs
+    }
     
     init?(entity: CompanyEntity) {
         guard let name = entity.name,

@@ -9,12 +9,23 @@ import SwiftUI
 
 struct PostView: View {
     let post: Post
+    @State var user: User?
     
     var body: some View {
         VStack (alignment: .leading, spacing: 5) {
             Text(post.title).font(.title2)
-            //TODO: Instead of userID need to display username
-            Text("\(post.userId)").font(.subheadline)            
+            if let user {
+                NavigationLink(destination: UserDetailView(user: user)) {
+                    Text(user.name)
+                }
+            } else {
+                ProgressView()
+                    .onAppear {
+                        Task {
+                            self.user = try await UserRepository.shared.getUser(id: post.userId)       
+                        }
+                    }
+            }
         }
     }
 }

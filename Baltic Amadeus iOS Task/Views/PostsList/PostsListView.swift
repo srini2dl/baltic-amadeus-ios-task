@@ -15,12 +15,25 @@ struct PostsListView: View {
             VStack {
                 List(viewModel.posts) { post in
                     LazyVStack(alignment: .leading) {
-                        NavigationLink {
-                            UserDetailView(userId: post.userId)
-                        } label: {
-                            PostView(post: post)
-                        }
+                        PostView(post: post)
                     }
+                }
+                .refreshable {
+                    await viewModel.refresh()
+                }
+                .alert(isPresented: $viewModel.showingAlert) {
+                    Alert(
+                        title: Text(viewModel.erroMessage),
+                        primaryButton: .default(
+                            Text("Retry"),
+                            action: {
+                                Task {
+                                    await viewModel.refresh()
+                                }
+                            }
+                        ),
+                        secondaryButton: .cancel()
+                    )
                 }
             }
             .navigationTitle("Posts")

@@ -9,30 +9,38 @@ import Foundation
 
 class PostsListViewModel: ObservableObject {
     @Published var posts: [Post] = []
-    private let apiService: BalticTaskService
+    @Published var showingAlert = false
+    var erroMessage: String = ""
     private let postRepository: PostRepository
     
-    init(
-        apiService: BalticTaskService = APIService.shared,
-        postRepository: PostRepository = .shared
-    ) {
-        self.apiService = apiService
+    init(postRepository: PostRepository = .shared) {
         self.postRepository = postRepository
     }
     
     @MainActor
     func loadPosts() async {
         do {
-            let post = await postRepository.getPosts()
-            if !post.isEmpty {
-                self.posts = post
-            } else {
-                self.posts = try await apiService.fetchPost()
-                postRepository.savePosts(posts)
-            }
+            posts = try await postRepository.getPosts()
         } catch {
-            //TODO: Handle error with a alertpopup
-            print("\(error)")
+            handleError(error: error)
         }
+    }
+    
+    @MainActor
+    func refresh() async {
+        do {
+            posts = try await postRepository.fetchPosts()
+        } catch {
+            handleError(error: error)
+        }
+    }
+    
+    func handleError(error: Error) {
+        if let error = error as? NetworkError {
+            erroMessage = error.message
+        } else {
+            erroMessage = error.localizedDescription
+        }
+        showingAlert = true
     }
 }
