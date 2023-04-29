@@ -100,7 +100,7 @@ class CoreDataService: CoreDataServicing {
     
     // MARK: - Adding
     
-    let serialQueue = DispatchQueue(label: "com.example.serialQueue")
+    let serialQueue = DispatchQueue(label: "com.app.baltictask")
     func addUser(_ user: User) {
         serialQueue.sync {
             guard fetchUser(by: user.id) == nil else { return }
