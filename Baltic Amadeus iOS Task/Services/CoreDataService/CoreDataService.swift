@@ -13,7 +13,8 @@ protocol CoreDataServicing {
     func fetchUsers() -> [UserEntity]
     func fetchUser(by userId: Int) -> UserEntity?
     func addUser(_ user: User)
-    func addPost(_ post: Post)
+    func addPosts(_ posts: [Post])
+    func deletePostsAndUsers()
 }
 
 class CoreDataService: CoreDataServicing {
@@ -66,6 +67,18 @@ class CoreDataService: CoreDataServicing {
        }
     }
     
+    func fetchUserPosts(by userId: Int) -> [PostEntity] {
+        let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "userId == %@", String(userId))
+        do {
+            let result = try mainContext.fetch(request)
+            return result
+        }
+        catch {
+           fatalError("Failed to fetch user: \(error)")
+       }
+    }
+    
     func fetchUsers() -> [UserEntity] {
         let request: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
         do {
@@ -91,6 +104,7 @@ class CoreDataService: CoreDataServicing {
     func addUser(_ user: User) {
         serialQueue.sync {
             guard fetchUser(by: user.id) == nil else { return }
+            let posts = fetchUserPosts(by: user.id)
             let entity = UserEntity(context: container.viewContext)
             entity.id = Int16(user.id)
             entity.name = user.name
@@ -109,25 +123,46 @@ class CoreDataService: CoreDataServicing {
             entity.company?.name = user.company.name
             entity.company?.catchPhrase = user.company.catchPhrase
             entity.company?.bs = user.company.bs
+            entity.posts = NSSet(array: posts)
             save()
         }
     }
     
-    func addPost(_ post: Post) {
+    func addPosts(_ posts: [Post]) {
         container.performBackgroundTask { context in
-            let entity = PostEntity(context: context)
-            entity.id = Int16(post.id)
-            entity.title = post.title
-            entity.body = post.body
-            entity.userId = Int16(post.userId)
-            try? context.save()
+            let dictionaries = posts.map { post -> [String: Any] in
+                return [
+                    "id": Int16(post.id),
+                    "title": post.title,
+                    "body": post.body,
+                    "userId": Int16(post.userId)
+                ]
+            }
+            
+            let array = NSMutableArray()
+            for dict in dictionaries {
+                let nsDict = NSMutableDictionary(dictionary: dict)
+                array.add(nsDict)
+            }
+            
+            let batchInsert = NSBatchInsertRequest(entity: PostEntity.entity(), objects: array as! [[String : Any]])
+            
+            do {
+                try context.execute(batchInsert)
+            } catch {
+                print("Error inserting posts: \(error.localizedDescription)")
+            }
         }
     }
+
     
-    func deletePost() {
-        for post in fetchPosts() {
-            mainContext.delete(post)
-        }
-        try? mainContext.save()
+    func deletePostsAndUsers() {
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: PostEntity.fetchRequest())
+        batchDeleteRequest.resultType = .resultTypeStatusOnly
+        _ = try? mainContext.execute(batchDeleteRequest)
+        let batchDeleteRequest2 = NSBatchDeleteRequest(fetchRequest: UserEntity.fetchRequest())
+        _ = try? mainContext.execute(batchDeleteRequest2)
+        batchDeleteRequest2.resultType = .resultTypeStatusOnly
+        mainContext.reset()
     }
 }

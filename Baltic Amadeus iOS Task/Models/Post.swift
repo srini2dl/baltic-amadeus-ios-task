@@ -42,11 +42,17 @@ struct Post: Codable, Identifiable {
             return nil
         }
         
+        var user: User? {
+            guard let userEntity = entity.user else { return nil }
+            return User(entity: userEntity)
+        }
+        
         self.init(
             userId: Int(entity.userId),
             id: Int(entity.id),
             title: title,
-            body: body
+            body: body,
+            user: user
         )
     }
 }

@@ -36,13 +36,12 @@ class PostRepository {
     
     func fetchPosts() async throws -> [Post] {
         cachedPosts = try await apiService.fetchPost()
-        coreDataService.deletePost()
+        coreDataService.deletePostsAndUsers()
+        savePosts(cachedPosts)
         return cachedPosts
     }
     
     func savePosts(_ posts: [Post]) {
-        for post in posts {
-            coreDataService.addPost(post)
-        }
+        coreDataService.addPosts(posts)
     }
 }
