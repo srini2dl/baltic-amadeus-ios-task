@@ -73,7 +73,6 @@
 			children = (
 				CAD0C1BB29F9AEC2006F51BF /* Repository */,
 				CAD0C1A129F98876006F51BF /* Views */,
-				CAD0C1A729F98951006F51BF /* Utils */,
 				CAD0C1A629F98922006F51BF /* Models */,
 				CAD0C1A329F9888C006F51BF /* Services */,
 				CAD0C19329F98784006F51BF /* Baltic_Amadeus_iOS_TaskApp.swift */,
@@ -135,13 +134,6 @@
 				CAD0C1AA29F98B6B006F51BF /* User.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		CAD0C1A729F98951006F51BF /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		CAD0C1B029F99EA2006F51BF /* Post */ = {

@@ -41,12 +41,10 @@ class UserRepository {
     
     private func fetchUser(id: Int) async throws -> User {
         let user = try await apiService.fetchUser(id: id)
-        cachedUsers.append(user)
-        saveUsers(user)
+        if cachedUsers.contains(where: { $0.id == id }) {
+            cachedUsers.append(user)
+            coreDataService.addUser(user)
+        }
         return user
-    }
-    
-    private func saveUsers(_ user: User) {
-        coreDataService.addUser(user)
     }
 }

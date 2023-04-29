@@ -23,7 +23,7 @@ class PostRepository {
     }
     
     func loadCache() {
-        cachedPosts = coreDataService.fetchPosts().compactMap({ Post(entity: $0) })
+        cachedPosts = coreDataService.fetchPosts().compactMap { Post(entity: $0) }
     }
     
     func getPosts() async throws -> [Post] {
