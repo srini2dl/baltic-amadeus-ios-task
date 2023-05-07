@@ -1,0 +1,29 @@
+name: Xcode Build & Test
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+   name: Build and Test
+   runs-on: self-hosted
+   
+   steps:
+    - uses: actions/checkout@v2
+    
+    - name: Cancel Previous Runs       
+      uses: styfle/cancel-workflow-action@0.9.1
+      with:
+          access_token: ${{ github.token }}
+    
+    - name: Commit message
+      run: echo "${{ github.event.head_commit.message }}"
+      
+    - name: Create build
+      run: bundle exec fastlane build
+      
+    - name: Unit Test
+      run: bundle exec fastlane tests
+
+
