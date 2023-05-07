@@ -8,12 +8,12 @@
 import Foundation
 
 class UserRepository {
-    let coreDataService: CoreDataServicing
-    let apiService: BalticTaskAPIService
+    private let coreDataService: CoreDataServicing
+    private let apiService: BalticTaskAPIService
     static let shared = UserRepository()
     private var cachedUsers: [User] = []
     
-    private init(
+    init(
         coreDataService: CoreDataServicing = CoreDataService.shared,
         apiService: BalticTaskAPIService = APIService.shared
     ) {
@@ -41,7 +41,7 @@ class UserRepository {
     
     private func fetchUser(id: Int) async throws -> User {
         let user = try await apiService.fetchUser(id: id)
-        if cachedUsers.contains(where: { $0.id == id }) {
+        if !cachedUsers.contains(where: { $0.id == id }) {
             cachedUsers.append(user)
             coreDataService.addUser(user)
         }

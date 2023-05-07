@@ -8,13 +8,13 @@
 import Foundation
 
 class PostRepository {
-    let coreDataService: CoreDataService
+    private let coreDataService: CoreDataServicing
     static let shared = PostRepository()
     private let apiService: BalticTaskAPIService
     private var cachedPosts: [Post] = []
     
-    private init(
-        coreDataService: CoreDataService = CoreDataService.shared,
+    init(
+        coreDataService: CoreDataServicing = CoreDataService.shared,
         apiService: BalticTaskAPIService = APIService.shared
     ) {
         self.coreDataService = coreDataService
