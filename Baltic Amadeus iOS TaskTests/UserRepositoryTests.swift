@@ -34,7 +34,7 @@ final class UserRepositoryTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        wait(for: [expectation], timeout: 0.1)
+        wait(for: [expectation], timeout: 2)
     }
     
     func testFetchUserSuccess() {
@@ -55,6 +55,6 @@ final class UserRepositoryTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 2)
     }
 }

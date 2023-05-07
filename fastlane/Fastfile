@@ -40,12 +40,14 @@ platform :ios do
   end
 
   lane :release do 
+    commit_message = "No changelog provided"
+    release_notes = commit_message || options[:release_notes]
     set_github_release(
       repository_name: "srini2dl/baltic-amadeus-ios-task",
       api_token: ENV["GITHUB_TOKEN"],
       name: "v" + current_version,
       tag_name: "v" + current_version,
-      description: (File.read("changelog") rescue "No changelog provided"),
+      description: release_notes,
       commitish: "main",
       upload_assets: ["Baltic Amadeus iOS Task.ipa"]
       )

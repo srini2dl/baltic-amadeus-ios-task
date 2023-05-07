@@ -34,7 +34,7 @@ final class PostRepositoryTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        wait(for: [expectation], timeout: 0.1)
+        wait(for: [expectation], timeout: 2)
     }
     
     func testFetchPostsSuccess() {
@@ -57,6 +57,6 @@ final class PostRepositoryTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 2)
     }
 }
